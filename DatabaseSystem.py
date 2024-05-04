@@ -79,7 +79,6 @@ generate_inventory_report()
 
 
 
-# transportation
 
 # Create tables for transportation management
 cursor.execute('''CREATE TABLE IF NOT EXISTS vehicles (
@@ -111,7 +110,6 @@ cursor.execute("INSERT INTO drivers (driver_name) VALUES (?)", ('John Doe',))
 cursor.execute("INSERT INTO drivers (driver_name) VALUES (?)", ('Jane Smith',))
 conn.commit()
 
-# Function to generate transportation schedule
 def generate_transportation_schedule(item_id, vehicle_id, driver_id, scheduled_date):
     cursor.execute(
         "INSERT INTO transportation_schedule (item_id, vehicle_id, driver_id, scheduled_date) VALUES (?, ?, ?, ?)",
