@@ -1,13 +1,10 @@
-import sqlite3
 import tkinter as tk
 from tkinter import messagebox
 from inventory.inventory_reports import InventoryReports
 
 
 class GUI:
-    def __init__(self, inventory_manager, transportation_manager):
-        self.conn = sqlite3.connect(db_file)
-        self.cursor = self.conn.cursor()
+    def __init__(self, inventory_manager, transportation_manager, db_file):
         self.inventory_manager = inventory_manager
         self.transportation_manager = transportation_manager
         self.db_file = db_file
@@ -74,7 +71,7 @@ class GUI:
                 messagebox.showinfo("Success", "Item added to inventory")
                 window.destroy()
         except ValueError:
-            messagebox.showerror("Error", "Quantity must be a positive integer")
+            messagebox.showerror("Error", "Quantity must be a positive number")
 
     def update_quantity_window(self):
         update_quantity_window = tk.Toplevel(self.root)
@@ -99,27 +96,14 @@ class GUI:
         try:
             item_id = int(item_id)
             new_quantity = int(new_quantity)
-
-            if self.is_item_id_present(item_id):
-                self.cursor.execute("UPDATE inventory SET quantity = ? WHERE id = ?", (new_quantity, item_id))
-                self.conn.commit()
-            else:
-                return messagebox.showinfo("Error", "Item id  not found")
-
             if new_quantity <= 0:
                 messagebox.showerror("Error", "Quantity must be greater than zero")
-
             else:
                 self.inventory_manager.update_quantity(item_id, new_quantity)
                 messagebox.showinfo("Success", "Quantity updated")
                 window.destroy()
         except ValueError:
             messagebox.showerror("Error", "Item ID and Quantity must be numbers")
-
-    def is_item_id_present(self, item_id):
-        self.cursor.execute("SELECT COUNT(*) FROM inventory WHERE id = ?", (item_id,))
-        count = self.cursor.fetchone()[0]
-        return count > 0
 
     def add_transportation_window(self):
         add_transportation_window = tk.Toplevel(self.root)
@@ -162,7 +146,6 @@ class GUI:
         try:
             vehicle_id = int(vehicle_id)
             driver_id = int(driver_id)
-
             if departure_time >= arrival_time:
                 messagebox.showerror("Error", "Departure time must be before arrival time")
             else:
@@ -180,8 +163,8 @@ class GUI:
 
         output_file = "inventory_report.txt"
         with open(output_file, "w") as file:
-            for item in inventory_report:
-                file.write(f"ID: {item[0]}, Name: {item[1]}, Quantity: {item[2]}, Location: {item[3]}\n")
+            for data in inventory_report:
+                file.write(f"ID: {data[0]}, Name: {data[1]}, Quantity: {data[2]}, Location: {data[3]}\n")
 
         report_window = tk.Toplevel(self.root)
         report_window.title("Inventory Report")
@@ -194,10 +177,9 @@ class GUI:
         messagebox.showinfo("Report Generated", f"The inventory report has been saved to {output_file}")
 
 
-# Usage example
 if __name__ == "__main__":
     db_file = "inventory_management.db"
     inventory_manager = None
     transportation_manager = None
-    gui = GUI(inventory_manager, transportation_manager)
+    gui = GUI(inventory_manager, transportation_manager, db_file)
     gui.run()

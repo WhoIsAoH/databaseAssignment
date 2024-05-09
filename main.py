@@ -10,22 +10,21 @@ from database.database import Database
 
 
 def main():
-    db_file = 'database/inventory_management.db'
+    db_file = 'database/inventory_managements.db'
     table_file = 'database/create_table.sql'
     database = Database(db_file)
     database.create_tables(table_file)
 
     inventory_manager = InventoryManagement(db_file)
-    security_manager = Authentication(db_file)
-    authorization_manager = Authorization(db_file)
+    Authentication(db_file)
+    Authorization(db_file)
     transportation_manager = TransportationManagement(db_file)
 
-    # Start the user interface (CLI or GUI)
-    user_interface = input("Choose interface (CLI or GUI): ").lower()
-    if user_interface == 'cli':
+    interface_of_user = input("Choose interface (CLI or GUI): ").lower()
+    if interface_of_user == 'cli':
         cli_interface = CLI(inventory_manager, transportation_manager)
         cli_interface.start()
-    elif user_interface == 'gui':
+    elif interface_of_user == 'gui':
         gui_interface = GUI(inventory_manager, transportation_manager, db_file)
         gui_interface.run()
     else:
