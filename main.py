@@ -16,13 +16,13 @@ def main():
     database.create_tables(table_file)
 
     inventory_manager = InventoryManagement(db_file)
-    Authentication(db_file)
+    auth=Authentication(db_file)
     Authorization(db_file)
     transportation_manager = TransportationManagement(db_file)
 
     interface_of_user = input("Choose interface (CLI or GUI): ").lower()
     if interface_of_user == 'cli':
-        cli_interface = CLI(inventory_manager, transportation_manager)
+        cli_interface = CLI(inventory_manager, transportation_manager,auth)
         cli_interface.start()
     elif interface_of_user == 'gui':
         gui_interface = GUI(inventory_manager, transportation_manager, db_file)

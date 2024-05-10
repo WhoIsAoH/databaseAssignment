@@ -1,30 +1,38 @@
+def generate_inventory_report():
+    print("Generating inventory report...")
+
+
 class CLI:
-    def __init__(self, inventory_manager, transportation_manager):
+    def __init__(self, inventory_manager, transportation_manager, auth):
         self.inventory_manager = inventory_manager
         self.transportation_manager = transportation_manager
+        self.auth = auth
 
     def start(self):
         print("Greeting to St. Mary's Logistics Database System")
 
         while True:
             print("\nPlease select an option:")
-            print("i. Add item to inventory")
-            print("ii. Update item quantity")
-            print("iii. Add transportation details")
-            print("iv. Generate inventory report")
-            print("v. Exit")
+            print("1. Add item to inventory")
+            print("2. Add transportation details")
+            print("3. Update item quantity")
+            print("4. register")
+            print("5. Generate inventory report")
+            print("6. Exit")
 
             option = input("Enter your choice: ")
 
-            if option == "i":
+            if option == "1":
                 self.add_item_to_inventory()
-            elif option == "ii":
+            elif option == "2":
                 self.update_item_quantity()
-            elif option == "iii":
+            elif option == "3":
                 self.add_transportation_details()
-            elif option == "iv":
-                self.generate_inventory_report()
-            elif option == "v":
+            elif option == "4":
+                generate_inventory_report()
+            elif option == "5":
+                self.user_register()
+            elif option == "6":
                 print("Exit...")
                 break
             else:
@@ -55,6 +63,8 @@ class CLI:
         self.transportation_manager.add_transportation(vehicle_id, driver_id, destination, departure_time, arrival_time)
         print("Transportation details added")
 
-    def generate_inventory_report(self):
-        print("Generating inventory report...")
-        # Call the method from InventoryReports class to generate the report
+    def user_register(self):
+        username = input("username:")
+        password = input("password:")
+        role = input("role")
+        self.auth.authenticate_user(username, password, role)
