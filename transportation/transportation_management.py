@@ -7,7 +7,8 @@ class TransportationManagement:
 
     def add_transportation(self, vehicle_id, driver_id, destination, departure_time, arrival_time):
         self.db.cursor.execute(
-            "INSERT INTO transportation (vehicle_id, driver_id, destination, departure_time, arrival_time) VALUES (?, ""?, ?, ?, ?)",
+            "INSERT INTO transportation (vehicle_id, driver_id, destination, departure_time, arrival_time) VALUES (?, "
+            "?, ?, ?, ?)",
             (vehicle_id, driver_id, destination, departure_time, arrival_time))
         self.db.conn.commit()
 

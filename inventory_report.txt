@@ -1,0 +1,4 @@
+ID: 1, Name: potato, Quantity: 7, Location: baneswor
+ID: 2, Name: condom, Quantity: 88, Location: biratnagar
+ID: 3, Name: condomss, Quantity: 15, Location: thali
+ID: 4, Name: rdrtftft, Quantity: 656, Location: yuyuyuyu

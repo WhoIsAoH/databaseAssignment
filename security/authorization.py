@@ -6,4 +6,8 @@ class Authorization:
         self.db = Database(db_file)
 
     def check_role_access(self, username, role, resource):
-        pass
+        self.db.cursor.execute(
+            "SELECT COUNT(*) FROM roles WHERE role = ? AND resource = ?",
+            (role, resource))
+        access_count = self.db.cursor.fetchone()[0]
+        return access_count > 0
