@@ -19,8 +19,7 @@ CREATE TABLE IF NOT EXISTS transportation (
     driver_id INTEGER,
     destination TEXT,
     arrival_time DATETIME,
-    departure_time DATETIME
-
+    departure_time DATETIME,
 );
 
 CREATE TABLE IF NOT EXISTS users (

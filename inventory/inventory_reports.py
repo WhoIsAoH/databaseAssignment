@@ -9,7 +9,7 @@ class InventoryReports:
 
         try:
             self.db.cursor.execute("SELECT * FROM inventory")
-            return self.db.cursor  # Return the cursor object directly
+            return self.db.cursor
 
         except Exception as e:
             print(f"Error generating inventory report: {e}")
