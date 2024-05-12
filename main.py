@@ -20,15 +20,18 @@ def main():
     Authorization(db_file)
     transportation_manager = TransportationManagement(db_file)
 
-    interface_of_user = input("Choose interface (GUI OR CLI): ").lower()
-    if interface_of_user == 'cli':
-        cli_interface = CLI(inventory_manager, transportation_manager, security_file, db_file)
-        cli_interface.start()
-    elif interface_of_user == 'gui':
-        gui_interface = GUI(inventory_manager, transportation_manager, db_file)
-        gui_interface.run()
-    else:
-        print("Invalid choice. Please choose CLI or GUI.")
+    try:
+        interface_of_user = input("Choose interface (GUI OR CLI): ").lower()
+        if interface_of_user == 'cli':
+            cli_interface = CLI(inventory_manager, transportation_manager, security_file, db_file)
+            cli_interface.start()
+        elif interface_of_user == 'gui':
+            gui_interface = GUI(inventory_manager, transportation_manager, db_file)
+            gui_interface.run()
+        else:
+            print("Invalid choice. Please choose CLI or GUI.")
+    except KeyboardInterrupt:
+        print("\nUser interrupted the program. Exiting...")
 
 
 if __name__ == "__main__":

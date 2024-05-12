@@ -20,7 +20,6 @@ class CLI:
             print("4. Generate inventory report")
             print("5. Register user")
             print("6. Exit")
-
             choice = input("Enter your choice: ")
 
             if choice == "1":
