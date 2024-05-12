@@ -23,11 +23,9 @@ class TestAuthentication(unittest.TestCase):
 
         self.auth.register_user("test_user", "password123", "user")
 
-        # Authenticate the user with correct credentials
         role = self.auth.authenticate_user("test_user", "password123", "user")
         self.assertEqual(role, "user")
 
-        # Authenticate the user with incorrect password
         role = self.auth.authenticate_user("test_user", "wrong_password", "user")
         self.assertIsNone(role)
 
